@@ -13,9 +13,9 @@ declare var jQuery: any;
 })
 export class ProjectComponent implements OnInit {
 
-  @ViewChild('projectForm') projectForm : NgForm;
+  @ViewChild('projectForm') projectForm: NgForm;
 
-  searchUsr : string = '';
+  searchUsr: string = '';
 
   projectModel: any = {
     "projectId": 0,
@@ -66,10 +66,10 @@ export class ProjectComponent implements OnInit {
     this.getProjects();
   }
 
-  selectChkBox(event){
-    if(event){
+  selectChkBox(event) {
+    if (event) {
       this.disableDates = false;
-    }else{
+    } else {
       this.disableDates = true;
     }
   }
@@ -78,7 +78,7 @@ export class ProjectComponent implements OnInit {
     let inputParam = this.projectModel;
     inputParam.startDate = new Date(this.projectModel.startDate);
     inputParam.endDate = new Date(this.projectModel.endDate);
-    if(inputParam.startDate >= inputParam.endDate){
+    if (inputParam.startDate >= inputParam.endDate) {
       this.dateError = true;
       return;
     }
@@ -162,7 +162,6 @@ export class ProjectComponent implements OnInit {
 
   editProject(projectModel) {
     this.buttonName = "Update";
-    console.log(projectModel);
     this.taskService.editProject = projectModel;
     this.ngOnInit();
 
@@ -188,7 +187,7 @@ export class ProjectComponent implements OnInit {
 
   selectUser(userObj: any) {
     jQuery('#projectModal').modal('hide');
-    this.projectModel.userName = userObj.firstName+" "+userObj.lastName;
+    this.projectModel.userName = userObj.firstName + " " + userObj.lastName;
     this.projectModel.userId = userObj.userId;
   }
 

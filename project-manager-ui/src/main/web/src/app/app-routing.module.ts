@@ -1,5 +1,5 @@
 import { RouterModule, Routes } from '@angular/router';
-import { NgModule }  from '@angular/core';
+import { NgModule } from '@angular/core';
 import { UpdatetaskComponent } from './updatetask/updatetask.component';
 import { ViewtaskComponent } from './viewtask/viewtask.component';
 import { UserComponent } from './user/user.component';
@@ -14,7 +14,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [ RouterModule.forRoot(routes) ],
-  exports: [ RouterModule ]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

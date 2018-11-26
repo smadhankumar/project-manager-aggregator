@@ -11,8 +11,7 @@ import { TaskService } from './shared/task-service';
 import { BackendService } from './shared/backend-service';
 import { HttpClientModule } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
-import { NgbModule, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
-import { CustomNgbDateParserFormatter } from './shared/custom-date-formatter';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ScreenFreezeComponent } from './screenfreeze/screenfreeze.component';
 import { UserComponent } from './user/user.component';
 import { SortPipe } from './shared/sort.pipe';
@@ -36,8 +35,7 @@ import { ProjectComponent } from './project/project.component';
     HttpClientModule,
     NgbModule.forRoot()
   ],
-  providers: [TaskService, BackendService, DatePipe,
-    { provide: NgbDateParserFormatter, useFactory: () => new CustomNgbDateParserFormatter('MM/dd/yyyy') }],
+  providers: [TaskService, BackendService, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

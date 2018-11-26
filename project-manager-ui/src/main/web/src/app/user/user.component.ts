@@ -13,7 +13,7 @@ declare var jQuery: any;
 })
 export class UserComponent implements OnInit {
 
-  @ViewChild('userForm') userForm : NgForm;
+  @ViewChild('userForm') userForm: NgForm;
 
   userModel: any = {};
   userModelList = [];

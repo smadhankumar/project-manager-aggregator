@@ -10,11 +10,11 @@ export class BackendService {
   constructor(private httpClient: HttpClient, private router: Router) { }
 
   getTasks(projectId) {
-    return this.httpClient.get(Config.API + '/project-manager/getTaskInfo/'+projectId);
+    return this.httpClient.get(Config.API + '/project-manager/getTaskInfo/' + projectId);
   }
 
   getParentTasks(projectId) {
-    return this.httpClient.get(Config.API + '/project-manager/getParentTaskInfo/'+projectId);
+    return this.httpClient.get(Config.API + '/project-manager/getParentTaskInfo/' + projectId);
   }
 
   getUsers(inputParam) {
@@ -31,16 +31,16 @@ export class BackendService {
   }
 
   deleteUser(userId) {
-    return this.httpClient.delete(Config.API + '/project-manager/deleteUser/'+userId);
+    return this.httpClient.delete(Config.API + '/project-manager/deleteUser/' + userId);
   }
 
-  getProjects(inputParam){
+  getProjects(inputParam) {
     return this.httpClient.get(Config.API + '/project-manager/getProjectInfo', inputParam);
 
   }
 
   deleteProject(projectId) {
-    return this.httpClient.delete(Config.API + '/project-manager/deleteProject/'+projectId);
+    return this.httpClient.delete(Config.API + '/project-manager/deleteProject/' + projectId);
   }
 
   updateProject(inputParam) {

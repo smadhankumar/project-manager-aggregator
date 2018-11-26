@@ -1,4 +1,4 @@
-import { Component,ViewEncapsulation, OnInit } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 
 @Component({
   selector: 'task-screenfreeze',
@@ -6,11 +6,11 @@ import { Component,ViewEncapsulation, OnInit } from '@angular/core';
   styleUrls: ['screenfreeze.component.css']
 })
 
-export class ScreenFreezeComponent implements OnInit { 
-  
+export class ScreenFreezeComponent implements OnInit {
+
   ngOnInit() {
-    
+
   }
-  
-} 
+
+}
 
