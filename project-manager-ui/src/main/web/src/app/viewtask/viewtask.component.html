@@ -1,0 +1,145 @@
+<div class="container-fluid" [hidden]="technicalError">
+  <div class="row margin-top-10">
+    <div class="col-xs-12 col-sm-12 col-md-1 margin-bottom-10">
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-11 margin-bottom-10">
+      <div class="row margin-top-10">
+        <div class="col-xs-12 col-sm-12 col-md-5 margin-bottom-10">
+          <div class="row margin-top-10">
+            <div class="col-xs-12 col-sm-12 col-md-9 margin-bottom-10">
+              <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-3 margin-bottom-10">
+                  <label class="label-font" for="project">Project:</label>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-9 margin-bottom-10">
+                  <input type="text" class="form-control" readonly id="project" #project="ngModel" required name="project" [(ngModel)]="projectName"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-3 margin-bottom-10">
+              <button type="submit" id="search-project" class="border-radius-20 btn btn-secondary" (click)="openProjectModal()">Search</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-7 margin-bottom-10">
+          <div class="row margin-top-10">
+            <div class="col-xs-12 col-sm-12 col-md-2 margin-bottom-10">
+              <label class="margin-top-6">Sort Task By:</label>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-10 margin-bottom-10">
+              <button type="button" id="sort-task-sd" class="btn btn-primary mx-1 margin-bottom-10" (click)="sortTask('startDate')">Start Date</button>
+              <button type="button" id="sort-task-ed" class=" btn btn-primary mx-1 margin-bottom-10" (click)="sortTask('endDate')">End Date</button>
+              <button type="button" id="sort-task-priority" class="btn btn-primary mx-1 margin-bottom-10" (click)="sortTask('priority')">Priority</button>
+              <button type="button" id="sort-task-completed" class="btn btn-primary mx-1 margin-bottom-10" (click)="sortTask('status')">Completed</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="row margin-top-10">
+    <div class="col-xs-12 col-sm-12 col-md-1 margin-bottom-10">
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-11 margin-bottom-10">
+      <div class="table-responsive">
+        <table *ngIf='null != taskModelList && taskModelList.length > 0' class="table app-custom-table">
+          <tbody *ngFor="let taskModel of taskModelList | taskFilter:projectName:'taskScreen' | sortPipe:fieldName">
+            <tr>
+              <th>Task</th>
+              <th>Parent</th>
+              <th>Priority</th>
+              <th>Start</th>
+              <th>End</th>
+              <th></th>
+            </tr>
+            <tr>
+              <td class="font-weight-400">
+                <p class="taskbadge">{{taskModel.taskName}}</p>
+              </td>
+              <td class="font-weight-400">
+                <p *ngIf="null !== taskModel.parentId && taskModel.parentId !== 0" class="taskbadge">{{taskModel.parentTaskName}}</p>
+                <p *ngIf="taskModel.parentId == 0" class="taskbadge">This Task Has No Parent</p>
+              </td>
+              <td class="font-weight-400">{{taskModel.priority}}</td>
+              <td class="font-weight-400">{{taskModel.startDate}}</td>
+              <td class="font-weight-400">{{taskModel.endDate}}</td>
+              <td class="font-weight-400">
+                <button type="submit" [disabled]="taskModel.disabled" id="add-task" (click)="editTask(taskModel)" class="btn btn-primary mx-1 margin-bottom-10">Edit</button>
+                <button type="button" [disabled]="taskModel.disabled" id="reset-task" (click)="endTask(taskModel)" class=" btn btn-primary mx-1 margin-bottom-10">End Task</button>
+              </td>
+            </tr>
+          </tbody>
+          <tbody *ngIf="(taskModelList | taskFilter:projectName:'taskScreen').length == 0">
+            <tr>
+              <td class="font-weight-400">No results found.</td>
+            </tr>
+          </tbody>
+        </table>
+        <table *ngIf='null == taskModelList || taskModelList.length == 0' class="table app-custom-table">
+          <tbody>
+            <tr>
+              <td class="font-weight-400">No results found.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid" [hidden]="!technicalError">
+  <div class="row margin-top-10">
+    <div class="col-xs-12 col-sm-12 col-md-2 margin-bottom-10">
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-8 margin-bottom-10 ant-anthem-alert ant-negative">
+      <div class="media">
+        <div class="media-left media-middle">
+          <span class="fa fa-exclamation"></span>
+        </div>
+        <div class="media-body media-middle ">
+          <p>
+            <span *ngIf="updateError">Unable to complete the task. Please try again later</span>
+            <span *ngIf="!updateError">We've encountered a technical error. Please try again later.</span>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-2 margin-bottom-10">
+    </div>
+
+  </div>
+</div>
+
+<task-screenfreeze class="text-align-center" [hidden]="!screenLoader"></task-screenfreeze>
+
+<div id="projectModal" class="modal fade hide" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <input type="text" id="searchProject" class="form-control" placeholder="Search project" [(ngModel)]="searchUsr" />
+        <button type="button" class="close" data-dismiss="modal" (click)="closeProjectModal()">&times;</button>
+      </div>
+      <!-- model body section -->
+      <div class="modal-body">
+        <div class="list-group" *ngIf="null != projectModelList && projectModelList.length > 0">
+          <button *ngFor="let projectModel of projectModelList | taskFilter:searchUsr:'projectScreen'" type="button" data-dismiss="modal"
+            class="list-group-item list-group-item-action" (click)="selectProject(projectModel)">
+            {{projectModel.projectName}}
+          </button>
+          <p *ngIf="(projectModelList | taskFilter:searchUsr:'projectScreen').length == 0">
+            No results found.
+          </p>
+        </div>
+        <div class="list-group" *ngIf="null == projectModelList || projectModelList.length == 0">
+          <p>There are no projects found in the database.</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="closeProjectModal()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

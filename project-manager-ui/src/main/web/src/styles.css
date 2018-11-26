@@ -1,0 +1,220 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+@import "~font-awesome/css/font-awesome.css";
+
+.margin-title{
+   margin: 15px 0px 12px 22px;
+}
+
+.navbar-expand-sm .navbar-nav .nav-item .nav-link {
+    color: #000;
+}
+.navbar-expand-sm .navbar-nav .nav-item .active{
+    font-weight: 600;
+    color :  #007bff;
+}
+.navbar-expand-sm .navbar-nav .nav-item .active > a,
+.navbar-expand-sm .navbar-nav .nav-item .active > a:hover,
+.navbar-expand-sm .navbar-nav .nav-item .active> a:focus {
+     font-weight: 600;
+}
+.padding-left-5{
+    padding-left : 5px;
+}
+.padding-left-2{
+    padding-left : 2px;
+}
+.padding-left-neutralize{
+    padding-left : 0px;
+}
+.margin-top-10{
+    margin-top: 10px;
+}
+div.error-message-cmn-cls{
+    display:none;
+    margin-top:10px;
+}
+.hasError label{
+    color:#cc0033 !important;
+}
+.hasError input[type="text"]{
+    border-color:#cc0033 !important;
+}
+.hasError div.error-message-cmn-cls{
+    display:block;
+}
+.hasError div.error-message-cmn-cls .fa-times{
+    color:#cc0033 !important;
+}
+.hasError div.error-message-cmn-cls .error-msg{
+    color:#cc0033 !important;
+}
+
+.margin-left-5{
+    margin-left: 5px;
+}
+
+.margin-bottom-10{
+    margin-bottom : 10px;
+}
+.padding-right-neutralize{
+    padding-right : 0px;
+}
+.float-right{
+    float : right !important;
+}
+
+.fa-times:before {
+    content: "\f00d";
+}
+.required-field-error:before {
+	content: "";
+    background: url(/assets/png/required-error-red.png) no-repeat;
+    width: 19px;
+    height: 17px;
+    margin: 2px 2px 0px 0px;
+    padding-top: 5px;
+    display: block;
+    float: left;
+}
+.ant-anthem-alert {
+    padding: 0;
+    border: 0 solid;
+    margin: 0 0 1.714rem;
+    border-radius: 0;
+    background: #eee;
+    clear: both
+}
+.ant-anthem-alert p {
+    margin: 0
+}
+.ant-anthem-alert .fa {
+    color: #fff;
+    font-size: 1.25rem;
+    top: 1px;
+    position: relative
+}
+.ant-anthem-alert .media-left {
+    background: #0079c2;
+    text-align: center;
+    padding: 32px 20px 20px 20px
+}
+.ant-anthem-alert .media-body {
+    padding: 15px 15px 15px
+}
+.ant-anthem-alert.ant-negative .media-left {
+    background-color: #c03
+}
+.margin-top-25{
+    margin-top: 25px;
+}
+
+.margin-top-50{
+    margin-top: 50px;
+}
+
+table.app-custom-table{
+    border-top:1px solid #ddd;
+    border-bottom:1px solid #ddd;
+    border-left:none;
+    border-right:none;
+    margin-top:10px;
+    margin-bottom:10px;
+}
+table.app-custom-table thead tr th{
+    padding-top:20px;
+    padding-bottom:20px;
+    font-weight:600;
+    font-size: 18px;
+}
+table.app-custom-table tbody tr td{
+    padding-top:20px;
+    padding-bottom:20px;
+    font-weight:600;
+}
+
+.table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 20px
+}
+
+.table-responsive {
+    min-height: .01%;
+    max-height: 500px;
+}
+
+@media screen and (max-width: 800px) {
+    .table-responsive {
+        width: 100%;
+        margin-bottom: 15px;
+        -ms-overflow-style: -ms-autohiding-scrollbar;
+    }
+    .table-responsive>.table {
+        margin-bottom: 0
+    }
+}
+
+.margin-top-6{
+    margin-top: 6px !important;
+}
+
+.list-group-item-override {
+    border-top: 1px !important;
+    border-bottom: 1px !important;
+    border-left: 0 !important;
+    border-right: 0 !important;
+    border-style: dotted !important;
+}
+
+.label-font{
+    font-weight: bold !important;
+    margin-top: 6px !important;
+}
+.min-width-171{
+    min-width: 171px !important;
+}
+.margin-left-5{
+    margin-left: 6px !important;
+}
+
+.border-radius-20{
+    border-radius: 20px !important;
+}
+
+.margin-top-6{
+    margin-top: 6px !important;
+}
+input[disabled],button[disabled]{
+    cursor:not-allowed !important;
+  }
+
+  .margin-top-24{
+    margin-top: 24px !important
+  }
+  /* Important part */
+.modal-dialog{
+    overflow-y: initial !important
+}
+.modal-body{
+    height: 250px;
+    overflow-y: auto;
+}
+
+.hr-div {
+    display: block;
+    position: relative;
+    padding: 0;
+    margin: 8px auto;
+    height: 0;
+    width: 100%;
+    max-height: 0;
+    font-size: 1px;
+    line-height: 0;
+    clear: both;
+    border: none;
+    border-top: 1px solid #000000;
+    border-bottom: 1px solid #ffffff;
+ }
+
+

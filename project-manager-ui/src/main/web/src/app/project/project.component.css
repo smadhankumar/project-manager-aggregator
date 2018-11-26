@@ -1,0 +1,25 @@
+.taskbadge {
+    font-size: medium;
+    color: #000000;
+    padding: 0.7em 0.7em 0.7em 0.7em;
+    background-color: #D3D3D3;
+    position: relative;
+    left: -1px;
+    top: -4px;
+    min-width: 16px;
+    border-radius: 4px 0 0 4px;
+  }
+  
+  .prioritybadge {
+    font-size: medium;
+    color: #000000;
+    padding: 2.6em 0.2em 0.2em 2.6em;
+    background-color: #D3D3D3;
+    position: relative;
+    left: -5px;
+    top: -10px;
+    min-width: 16px;
+    margin-left: 0.8em;
+    border-radius: 4px 0 0 4px;
+  }
+ 

@@ -1,0 +1,176 @@
+<div class="container-fluid" [hidden]="technicalError">
+    <form #userForm="ngForm" method="post" (ngSubmit)="updateUser()" novalidate>
+        <div class="row margin-top-10">
+            <div class="col-xs-12 col-sm-12 col-md-1 margin-bottom-10">
+
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-7">
+                <div class="row margin-top-10" [class.hasError]="firstName.invalid && (firstName.dirty || firstName.touched)">
+                    <div class="col-xs-12 col-sm-12 col-md-4 margin-bottom-10">
+                        <label class="label-font" for="firstName">First Name:</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-8 margin-bottom-10">
+                        <input type="text" class="form-control" id="firstName" #firstName="ngModel" required name="firstName" [(ngModel)]="userModel.firstName"
+                            aria-describedby="firstNameErrorDiv" />
+                        <div role="alert" aria-live="assertive" id="firstNameErrorDiv" *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)">
+                            <div class="error-message-cmn-cls" *ngIf="firstName.errors.required">
+                                <span class="required-field-error"></span>
+                                <span class="error-msg">Required Field.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row margin-top-10" [class.hasError]="lastName.invalid && (lastName.dirty || lastName.touched)">
+                    <div class="col-xs-12 col-sm-12 col-md-4 margin-bottom-10">
+                        <label class="label-font" for="lastName">Last Name:</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-8 margin-bottom-10">
+                        <input type="text" class="form-control" id="lastName" #lastName="ngModel" required name="lastName" [(ngModel)]="userModel.lastName"
+                            aria-describedby="lastNameErrorDiv" />
+                        <div role="alert" aria-live="assertive" id="lastNameErrorDiv" *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)">
+                            <div class="error-message-cmn-cls" *ngIf="lastName.errors.required">
+                                <span class="required-field-error"></span>
+                                <span class="error-msg">Required Field.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row margin-top-10" [class.hasError]="empId.invalid && (empId.dirty || empId.touched)">
+                    <div class="col-xs-12 col-sm-12 col-md-4 margin-bottom-10">
+                        <label class="label-font" for="empId">Employee ID:</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-4 margin-bottom-10">
+                        <input type="text" class="form-control" id="empId" #empId="ngModel" required name="empId" [(ngModel)]="userModel.empId" />
+                        <div role="alert" aria-live="assertive" id="empIdErrorDiv" *ngIf="empId.invalid && (empId.dirty || empId.touched)">
+                            <div class="error-message-cmn-cls" *ngIf="empId.errors.required">
+                                <span class="required-field-error"></span>
+                                <span class="error-msg">Required Field.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-4 margin-bottom-10"></div>
+                </div>
+                <div class="row margin-top-10">
+                    <div class="col-xs-12 col-sm-12 col-md-7 margin-bottom-10">
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-5 margin-bottom-10">
+                        <div class="row margin-top-10">
+                            <div class="col-xs-12 col-sm-12 col-md-12 margin-bottom-10">
+                                <button type="submit" [disabled]="!userForm.form.valid && (userForm.form.untouched || userForm.form.touched)" id="add-user"
+                                    class="btn btn-primary">{{buttonName}}</button>
+                                <button type="reset" id="reset-user" class="mx-1 margin-left-5 btn btn-secondary" (click)="resetFields()">Reset</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-4 margin-bottom-10">
+
+            </div>
+        </div>
+
+    </form>
+    <div class="row margin-top-10">
+        <div class="col-xs-12 col-sm-12 col-md-1 margin-bottom-10">
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-7 margin-bottom-10 hr-div">
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-4 margin-bottom-10">
+
+        </div>
+    </div>
+    <div class="row margin-top-10">
+        <div class="col-xs-12 col-sm-12 col-md-1 margin-bottom-10">
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-7 margin-bottom-10">
+            <div class="row margin-bottom-10">
+                <div class="col-xs-12 col-sm-12 col-md-4 margin-bottom-10">
+                    <input type="text" id="searchUsr" class="form-control" placeholder="Search..." [(ngModel)]="searchUsr" />
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-8 margin-bottom-10">
+                    <div class="row margin-bottom-10">
+                        <div class="col-xs-12 col-sm-12 col-md-1 margin-bottom-10">
+                            <label class="margin-top-6">Sort:</label>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-11 margin-bottom-10">
+                            <button type="button" id="sort-user-fn" class="mx-1 btn btn-primary margin-bottom-10" (click)="sortUser('firstName')">First Name</button>
+                            <button type="button" id="sort-user-ln" class="mx-1 btn btn-primary margin-bottom-10" (click)="sortUser('lastName')">Last Name</button>
+                            <button type="button" id="sort-user-id" class="mx-1 btn btn-primary margin-bottom-10" (click)="sortUser('empId')">Id</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-4 margin-bottom-10">
+        </div>
+    </div>
+    <div class="row margin-top-10">
+        <div class="col-xs-12 col-sm-12 col-md-1 margin-bottom-10">
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-7 margin-bottom-10">
+            <ul class="list-group" *ngIf="null != userModelList && userModelList.length > 0">
+                <li class="list-group-item list-group-item-override" *ngFor="let userModel of userModelList | taskFilter:searchUsr:'userScreen' | sortPipe:fieldName:'userScreen'">
+                    <div class="row margin-top-10">
+                        <div class="col-xs-12 col-sm-12 col-md-10 margin-bottom-10">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-12 margin-bottom-10">
+                                    {{userModel.firstName}}
+                                </div>
+                            </div>
+                            <div class="row margin-top-10">
+                                <div class="col-xs-12 col-sm-12 col-md-12 margin-bottom-10">
+                                    {{userModel.lastName}}
+                                </div>
+                            </div>
+                            <div class="row margin-top-10">
+                                <div class="col-xs-12 col-sm-12 col-md-12 margin-bottom-10">
+                                    {{userModel.empId}}
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-2 margin-bottom-10">
+                            <div class="row margin-top-10">
+                                <div class="col-xs-12 col-sm-12 col-md-12 margin-bottom-10">
+                                    <button type="button" id="edit-user" (click)="editUser(userModel.userId)" class="mx-1 margin-bottom-10 btn btn-primary">Edit</button>
+                                    <button type="button" id="delete-user" (click)="deleteUser(userModel.userId)" class="mx-1 margin-bottom-10 btn btn-primary">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item list-group-item-override" *ngIf="(userModelList | taskFilter:searchUsr:'userScreen').length == 0">No results found</li>
+            </ul>
+            <ul class="list-group" *ngIf="null == userModelList || userModelList.length == 0">
+                <li class="list-group-item list-group-item-override">No results found</li>
+            </ul>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-4 margin-bottom-10">
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid" [hidden]="!technicalError">
+    <div class="row margin-top-50">
+        <div class="col-xs-12 col-sm-12 col-md-1 margin-bottom-10">
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-7 margin-bottom-10 ant-anthem-alert ant-negative">
+            <div class="media">
+                <div class="media-left media-middle">
+                    <span class="fa fa-exclamation"></span>
+                </div>
+                <div class="media-body media-middle ">
+                    <p>
+                        <span *ngIf="updateError">Unable to add/edit user. Please try again later</span>
+                        <span *ngIf="!updateError">We've encountered a technical error. Please try again later.</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-4 margin-bottom-10">
+        </div>
+    </div>
+</div>
+
+<task-screenfreeze class="text-align-center" [hidden]="!screenLoader"></task-screenfreeze>
