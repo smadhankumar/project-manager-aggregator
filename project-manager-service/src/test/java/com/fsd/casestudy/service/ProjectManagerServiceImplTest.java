@@ -368,4 +368,17 @@ public class ProjectManagerServiceImplTest {
 		return projectInfo;
 	}
 
+	@Test
+	public void updateParentTaskInfo_Valid() throws JsonParseException, JsonMappingException, IOException, TaskException {
+		TypeReference<TaskInfo> mapObj = new TypeReference<TaskInfo>() {
+		};
+		ClassLoader classLoader = getClass().getClassLoader();
+		File file = new File(classLoader.getResource("parenttaskinfo.json").getFile());
+		ObjectMapper mapper = new ObjectMapper();
+		TaskInfo task = mapper.readValue(file, mapObj);
+		given(projectManagerDAOImpl.getProject(1)).willReturn(new Project());
+		ParentTask parentTask = new ParentTask();
+		given(projectManagerDAOImpl.updateParentTask(parentTask)).willReturn(parentTask);
+		assertTrue(projectManagerService.updateTaskInfo(task));
+	}
 }
