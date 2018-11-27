@@ -241,11 +241,11 @@
             <!-- model body section -->
             <div class="modal-body">
                 <div class="list-group" *ngIf="null != parentTaskList && parentTaskList.length > 0">
-                    <button *ngFor="let parentTaskModel of parentTaskList | taskFilter:searchUsr:'taskScreen'" type="button" data-dismiss="modal"
+                    <button *ngFor="let parentTaskModel of parentTaskList | taskFilter:searchUsr:'parentTaskScreen'" type="button" data-dismiss="modal"
                         class="list-group-item list-group-item-action" (click)="selectParentTask(parentTaskModel)">
                         {{parentTaskModel.parentTaskName}}
                     </button>
-                    <p *ngIf="(parentTaskList | taskFilter:searchUsr:'taskScreen').length == 0">
+                    <p *ngIf="(parentTaskList | taskFilter:searchUsr:'parentTaskScreen').length == 0">
                         No results found.
                     </p>
                 </div>

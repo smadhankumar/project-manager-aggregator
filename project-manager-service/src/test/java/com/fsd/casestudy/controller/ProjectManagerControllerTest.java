@@ -34,6 +34,12 @@ import com.fsd.casestudy.model.TaskInfo;
 import com.fsd.casestudy.model.UserInfo;
 import com.fsd.casestudy.service.ProjectManagerService;
 
+/**
+ * Test class for unit testing ProjectManager Controller
+ * 
+ * @author 463657
+ *
+ */
 @RunWith(SpringRunner.class)
 @WebMvcTest(ProjectManagerController.class)
 public class ProjectManagerControllerTest {
@@ -57,7 +63,7 @@ public class ProjectManagerControllerTest {
 				.andExpect(jsonPath("$", hasSize(1)))
 				.andExpect(jsonPath("$[0].projectName", is(projectInfo.getProjectName())));
 	}
-	
+
 	@Test
 	public void getUserInfo_thenReturnJsonArray() throws Exception {
 
@@ -68,10 +74,9 @@ public class ProjectManagerControllerTest {
 		given(projectManagerServiceImpl.getUserInfo()).willReturn(users);
 
 		mvc.perform(get("/getUserInfo").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
-				.andExpect(jsonPath("$", hasSize(1)))
-				.andExpect(jsonPath("$[0].userId", is(userInfo.getUserId())));
+				.andExpect(jsonPath("$", hasSize(1))).andExpect(jsonPath("$[0].userId", is(userInfo.getUserId())));
 	}
-	
+
 	@Test
 	public void getTaskInfo_thenReturnJsonArray() throws Exception {
 
@@ -82,11 +87,10 @@ public class ProjectManagerControllerTest {
 		given(projectManagerServiceImpl.getTaskInfo(1)).willReturn(tasks);
 
 		mvc.perform(get("/getTaskInfo/1").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
-				.andExpect(jsonPath("$", hasSize(1)))
-				.andExpect(jsonPath("$[0].taskName", is(taskInfo.getTaskName())));
-		
+				.andExpect(jsonPath("$", hasSize(1))).andExpect(jsonPath("$[0].taskName", is(taskInfo.getTaskName())));
+
 	}
-	
+
 	@Test
 	public void getParentTaskInfo_thenReturnJsonArray() throws Exception {
 
@@ -96,188 +100,204 @@ public class ProjectManagerControllerTest {
 
 		given(projectManagerServiceImpl.getParentTasks(1)).willReturn(tasks);
 
-		mvc.perform(get("/getParentTaskInfo/{projectId}",1).contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
-				.andExpect(jsonPath("$", hasSize(1)))
+		mvc.perform(get("/getParentTaskInfo/{projectId}", 1).contentType(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk()).andExpect(jsonPath("$", hasSize(1)))
 				.andExpect(jsonPath("$[0].parentTaskName", is(taskInfo.getParentTaskName())));
-		
+
 	}
-	
+
 	@Test
 	public void getParentTaskInfo_InvalidArgument() throws Exception {
 		mvc.perform(MockMvcRequestBuilders.get("/getParentTaskInfo/f").accept(MediaType.APPLICATION_JSON))
-		.andExpect(status().isBadRequest());
+				.andExpect(status().isBadRequest());
 	}
-	
+
 	@Test
 	public void addOrUpdUser_updateUser() throws Exception {
 		UserInfo userInfo = getUserInfo();
 		userInfo.setUserId(0);
 		given(projectManagerServiceImpl.updateUserInfo(userInfo)).willReturn(true);
 		ObjectMapper mapper = new ObjectMapper();
-	
-		mvc.perform(post("/updateUser").contentType(MediaType.APPLICATION_JSON).content(mapper.writeValueAsString(userInfo)).accept(MediaType.APPLICATION_JSON)
-        ).andExpect(status().isOk());
-  
+
+		mvc.perform(post("/updateUser").contentType(MediaType.APPLICATION_JSON)
+				.content(mapper.writeValueAsString(userInfo)).accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk());
+
 	}
-	
+
 	@Test
 	public void addOrUpdUser_addUser() throws Exception {
 		UserInfo userInfo = getUserInfo_Add();
 
 		given(projectManagerServiceImpl.updateUserInfo(userInfo)).willReturn(true);
 		ObjectMapper mapper = new ObjectMapper();
-	
-		mvc.perform(post("/updateUser").contentType(MediaType.APPLICATION_JSON).content(mapper.writeValueAsString(userInfo)).accept(MediaType.APPLICATION_JSON)
-        ).andExpect(status().isOk());
-  
+
+		mvc.perform(post("/updateUser").contentType(MediaType.APPLICATION_JSON)
+				.content(mapper.writeValueAsString(userInfo)).accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk());
+
 	}
-	
+
 	@Test
 	public void updateProject_editProject() throws Exception {
 		ProjectInfo projectInfo = getProjectInfo();
 
 		given(projectManagerServiceImpl.updateProjectInfo(projectInfo)).willReturn(true);
 		ObjectMapper mapper = new ObjectMapper();
-	
-		mvc.perform(post("/updateProject").contentType(MediaType.APPLICATION_JSON).content(mapper.writeValueAsString(projectInfo)).accept(MediaType.APPLICATION_JSON)
-        ).andExpect(status().isOk());
-  
+
+		mvc.perform(post("/updateProject").contentType(MediaType.APPLICATION_JSON)
+				.content(mapper.writeValueAsString(projectInfo)).accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk());
+
 	}
-	
+
 	@Test
 	public void updateProject_addProject() throws Exception {
 		ProjectInfo projectInfo = getProjectInfo_Add();
 		given(projectManagerServiceImpl.updateProjectInfo(projectInfo)).willReturn(true);
 		ObjectMapper mapper = new ObjectMapper();
-	
-		mvc.perform(post("/updateProject").contentType(MediaType.APPLICATION_JSON).content(mapper.writeValueAsString(projectInfo)).accept(MediaType.APPLICATION_JSON)
-        ).andExpect(status().isOk());
-  
+
+		mvc.perform(post("/updateProject").contentType(MediaType.APPLICATION_JSON)
+				.content(mapper.writeValueAsString(projectInfo)).accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk());
+
 	}
-	
+
 	@Test
 	public void updateTask_editTask() throws Exception {
 		TaskInfo taskInfo = getTaskInfo();
 
 		given(projectManagerServiceImpl.updateTaskInfo(taskInfo)).willReturn(true);
 		ObjectMapper mapper = new ObjectMapper();
-	
-		mvc.perform(post("/updateTask").contentType(MediaType.APPLICATION_JSON).content(mapper.writeValueAsString(taskInfo)).accept(MediaType.APPLICATION_JSON)
-        ).andExpect(status().isOk());
-  
+
+		mvc.perform(post("/updateTask").contentType(MediaType.APPLICATION_JSON)
+				.content(mapper.writeValueAsString(taskInfo)).accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk());
+
 	}
-	
+
 	@Test
 	public void updateTask_addTask() throws Exception {
 		TaskInfo taskInfo = getTaskInfo_Add();
 		given(projectManagerServiceImpl.updateTaskInfo(taskInfo)).willReturn(true);
 		ObjectMapper mapper = new ObjectMapper();
-	
-		mvc.perform(post("/updateTask").contentType(MediaType.APPLICATION_JSON).content(mapper.writeValueAsString(taskInfo)).accept(MediaType.APPLICATION_JSON)
-        ).andExpect(status().isOk());
-  
+
+		mvc.perform(post("/updateTask").contentType(MediaType.APPLICATION_JSON)
+				.content(mapper.writeValueAsString(taskInfo)).accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk());
+
 	}
-	
+
 	@Test
 	public void updateTask_suspendTask() throws Exception {
 		TaskInfo taskInfo = getTaskInfo_Suspend();
 		given(projectManagerServiceImpl.updateTaskInfo(taskInfo)).willReturn(true);
 		ObjectMapper mapper = new ObjectMapper();
-	
-		mvc.perform(post("/updateProject").contentType(MediaType.APPLICATION_JSON).content(mapper.writeValueAsString(taskInfo)).accept(MediaType.APPLICATION_JSON)
-        ).andExpect(status().isOk());
-  
+
+		mvc.perform(post("/updateProject").contentType(MediaType.APPLICATION_JSON)
+				.content(mapper.writeValueAsString(taskInfo)).accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk());
+
 	}
-	
+
 	@Test
 	public void deleteProject_Success() throws Exception {
 
 		given(projectManagerServiceImpl.deleteProject(1)).willReturn(true);
 
-		mvc.perform(delete("/deleteProject/{id}",1).contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
-		
+		mvc.perform(delete("/deleteProject/{id}", 1).contentType(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk());
+
 	}
-	
+
 	@Test
 	public void deleteUser_Success() throws Exception {
 
 		given(projectManagerServiceImpl.deleteUser(1)).willReturn(true);
 
-		mvc.perform(delete("/deleteUser/{id}",1).contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
-		
+		mvc.perform(delete("/deleteUser/{id}", 1).contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
+
 	}
-	
+
 	private ProjectInfo getProjectInfo() throws JsonParseException, JsonMappingException, IOException {
-		TypeReference<ProjectInfo> mapObj = new TypeReference<ProjectInfo>() {};
+		TypeReference<ProjectInfo> mapObj = new TypeReference<ProjectInfo>() {
+		};
 		ClassLoader classLoader = getClass().getClassLoader();
 		File file = new File(classLoader.getResource("projectinfo.json").getFile());
 		ObjectMapper mapper = new ObjectMapper();
 		ProjectInfo projectInfo = mapper.readValue(file, mapObj);
 		return projectInfo;
 	}
-	
+
 	private ProjectInfo getProjectInfo_Add() throws JsonParseException, JsonMappingException, IOException {
-		TypeReference<ProjectInfo> mapObj = new TypeReference<ProjectInfo>() {};
+		TypeReference<ProjectInfo> mapObj = new TypeReference<ProjectInfo>() {
+		};
 		ClassLoader classLoader = getClass().getClassLoader();
 		File file = new File(classLoader.getResource("projectinfo_add.json").getFile());
 		ObjectMapper mapper = new ObjectMapper();
 		ProjectInfo projectInfo = mapper.readValue(file, mapObj);
 		return projectInfo;
 	}
-	
+
 	private UserInfo getUserInfo() throws JsonParseException, JsonMappingException, IOException {
-		TypeReference<UserInfo> mapObj = new TypeReference<UserInfo>() {};
+		TypeReference<UserInfo> mapObj = new TypeReference<UserInfo>() {
+		};
 		ClassLoader classLoader = getClass().getClassLoader();
 		File file = new File(classLoader.getResource("user.json").getFile());
 		ObjectMapper mapper = new ObjectMapper();
 		UserInfo userInfo = mapper.readValue(file, mapObj);
 		return userInfo;
 	}
-	
+
 	private UserInfo getUserInfo_Add() throws JsonParseException, JsonMappingException, IOException {
-		TypeReference<UserInfo> mapObj = new TypeReference<UserInfo>() {};
+		TypeReference<UserInfo> mapObj = new TypeReference<UserInfo>() {
+		};
 		ClassLoader classLoader = getClass().getClassLoader();
 		File file = new File(classLoader.getResource("user_add.json").getFile());
 		ObjectMapper mapper = new ObjectMapper();
 		UserInfo userInfo = mapper.readValue(file, mapObj);
 		return userInfo;
 	}
-	
+
 	private TaskInfo getTaskInfo() throws JsonParseException, JsonMappingException, IOException {
-		TypeReference<TaskInfo> mapObj = new TypeReference<TaskInfo>() {};
+		TypeReference<TaskInfo> mapObj = new TypeReference<TaskInfo>() {
+		};
 		ClassLoader classLoader = getClass().getClassLoader();
 		File file = new File(classLoader.getResource("taskinfo.json").getFile());
 		ObjectMapper mapper = new ObjectMapper();
 		TaskInfo taskInfo = mapper.readValue(file, mapObj);
 		return taskInfo;
 	}
-	
+
 	private TaskInfo getTaskInfo_Add() throws JsonParseException, JsonMappingException, IOException {
-		TypeReference<TaskInfo> mapObj = new TypeReference<TaskInfo>() {};
+		TypeReference<TaskInfo> mapObj = new TypeReference<TaskInfo>() {
+		};
 		ClassLoader classLoader = getClass().getClassLoader();
 		File file = new File(classLoader.getResource("taskinfo_add.json").getFile());
 		ObjectMapper mapper = new ObjectMapper();
 		TaskInfo taskInfo = mapper.readValue(file, mapObj);
 		return taskInfo;
 	}
-	
+
 	private TaskInfo getTaskInfo_Suspend() throws JsonParseException, JsonMappingException, IOException {
-		TypeReference<TaskInfo> mapObj = new TypeReference<TaskInfo>() {};
+		TypeReference<TaskInfo> mapObj = new TypeReference<TaskInfo>() {
+		};
 		ClassLoader classLoader = getClass().getClassLoader();
 		File file = new File(classLoader.getResource("taskinfo_suspend.json").getFile());
 		ObjectMapper mapper = new ObjectMapper();
 		TaskInfo taskInfo = mapper.readValue(file, mapObj);
 		return taskInfo;
 	}
-	
+
 	private ParentTaskInfo getParentTaskInfo() throws JsonParseException, JsonMappingException, IOException {
-		TypeReference<ParentTaskInfo> mapObj = new TypeReference<ParentTaskInfo>() {};
+		TypeReference<ParentTaskInfo> mapObj = new TypeReference<ParentTaskInfo>() {
+		};
 		ClassLoader classLoader = getClass().getClassLoader();
 		File file = new File(classLoader.getResource("parenttask.json").getFile());
 		ObjectMapper mapper = new ObjectMapper();
 		ParentTaskInfo parentTaskInfo = mapper.readValue(file, mapObj);
 		return parentTaskInfo;
-		
+
 	}
 
 }

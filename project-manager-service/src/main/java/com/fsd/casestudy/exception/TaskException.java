@@ -1,16 +1,14 @@
 package com.fsd.casestudy.exception;
 
-
 import java.io.Serializable;
-
 
 /**
  * Exception class used for returning exception
+ * 
  * @author 463657
  *
  */
-public class TaskException extends Exception implements Serializable
-{
+public class TaskException extends Exception implements Serializable {
 
 	private static final long serialVersionUID = -2848300257012566378L;
 
@@ -18,40 +16,34 @@ public class TaskException extends Exception implements Serializable
 	private String errorType;
 	private String errorMessage;
 	private int returnStatus;
-	
-	public TaskException(String errorCode, String errorMessage, int returnStatus)
-	{
+
+	public TaskException(String errorCode, String errorMessage, int returnStatus) {
 		super(errorMessage);
 		this.errorCode = errorCode;
 		this.errorMessage = errorMessage;
 		this.returnStatus = returnStatus;
 	}
-	
+
 	public TaskException() {
-		
+
 	}
 
-
-	public String getErrorCode()
-	{
+	public String getErrorCode() {
 		return errorCode;
 	}
 
-	public void setErrorCode(String errorCode)
-	{
+	public void setErrorCode(String errorCode) {
 		this.errorCode = errorCode;
 	}
 
-	public String getErrorMessage()
-	{
+	public String getErrorMessage() {
 		return errorMessage;
 	}
 
-	public void setErrorMessage(String errorMessage)
-	{
+	public void setErrorMessage(String errorMessage) {
 		this.errorMessage = errorMessage;
 	}
-	
+
 	public String getErrorType() {
 		return errorType;
 	}

@@ -23,6 +23,12 @@ import com.fsd.casestudy.repository.ProjectRepository;
 import com.fsd.casestudy.repository.TaskRepository;
 import com.fsd.casestudy.repository.UserRepository;
 
+/**
+ * Test class for unit testing ProjectManager DAO
+ * 
+ * @author 463657
+ *
+ */
 @RunWith(MockitoJUnitRunner.class)
 public class ProjectManagerDAOImplTest {
 

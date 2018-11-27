@@ -9,14 +9,26 @@ import org.springframework.context.annotation.Bean;
 
 import com.fsd.casestudy.config.CorsFilter;
 
+/**
+ * This class acts as application startup for starting Project Manager
+ * application as Spring boot application
+ * 
+ * @author 463657
+ *
+ */
 @SpringBootApplication
 @EnableAutoConfiguration
-public class ProjectManagerApplication extends SpringBootServletInitializer{
+public class ProjectManagerApplication extends SpringBootServletInitializer {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProjectManagerApplication.class, args);
 	}
-	
+
+	/**
+	 * CORS Filter for allowing endpoints
+	 * 
+	 * @return
+	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Bean
 	public FilterRegistrationBean corsFilter() {
@@ -26,6 +38,6 @@ public class ProjectManagerApplication extends SpringBootServletInitializer{
 		registrationBean.addUrlPatterns("/*");
 
 		return registrationBean;
-	} 
-	
+	}
+
 }

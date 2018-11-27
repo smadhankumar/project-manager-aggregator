@@ -35,6 +35,12 @@ import com.fsd.casestudy.model.ProjectInfo;
 import com.fsd.casestudy.model.TaskInfo;
 import com.fsd.casestudy.model.UserInfo;
 
+/**
+ * Test class for unit testing ProjectManager Service
+ * 
+ * @author 463657
+ *
+ */
 @RunWith(SpringRunner.class)
 public class ProjectManagerServiceImplTest {
 
@@ -212,17 +218,16 @@ public class ProjectManagerServiceImplTest {
 		thrown.expect(TaskException.class);
 		projectManagerService.getParentTasks(1);
 	}
+
 	@Test
-	public void deleteUser_Valid()
-			throws JsonParseException, JsonMappingException, IOException, TaskException {
+	public void deleteUser_Valid() throws JsonParseException, JsonMappingException, IOException, TaskException {
 
 		given(projectManagerDAOImpl.deleteUser(1)).willReturn(true);
 		assertTrue(projectManagerService.deleteUser(1));
 	}
-	
+
 	@Test
-	public void deleteUser_WithException()
-			throws JsonParseException, JsonMappingException, IOException, TaskException {
+	public void deleteUser_WithException() throws JsonParseException, JsonMappingException, IOException, TaskException {
 		TypeReference<TaskException> mapObj = new TypeReference<TaskException>() {
 		};
 		ClassLoader classLoader = getClass().getClassLoader();
@@ -236,15 +241,13 @@ public class ProjectManagerServiceImplTest {
 		projectManagerService.deleteUser(1);
 	}
 
-
 	@Test
-	public void deleteProject_Valid()
-			throws JsonParseException, JsonMappingException, IOException, TaskException {
+	public void deleteProject_Valid() throws JsonParseException, JsonMappingException, IOException, TaskException {
 
 		given(projectManagerDAOImpl.deleteProject(1)).willReturn(true);
 		assertTrue(projectManagerService.deleteProject(1));
 	}
-	
+
 	@Test
 	public void deleteProject_WithException()
 			throws JsonParseException, JsonMappingException, IOException, TaskException {
@@ -260,11 +263,9 @@ public class ProjectManagerServiceImplTest {
 		thrown.expect(TaskException.class);
 		projectManagerService.deleteProject(1);
 	}
-	
-	
+
 	@Test
-	public void updateUserInfo_Valid()
-			throws JsonParseException, JsonMappingException, IOException, TaskException {
+	public void updateUserInfo_Valid() throws JsonParseException, JsonMappingException, IOException, TaskException {
 		TypeReference<List<User>> mapObj = new TypeReference<List<User>>() {
 		};
 		ClassLoader classLoader = getClass().getClassLoader();
@@ -272,28 +273,12 @@ public class ProjectManagerServiceImplTest {
 		ObjectMapper mapper = new ObjectMapper();
 		List<User> users = mapper.readValue(file, mapObj);
 		given(projectManagerDAOImpl.updateUser(users.get(0))).willReturn(users.get(0));
-		
+
 		assertTrue(projectManagerService.updateUserInfo(getUserInfo()));
 	}
 
-	/*@Test
-	public void updateUserInfo_WithException()
-			throws JsonParseException, JsonMappingException, IOException, TaskException {
-		TypeReference<TaskException> mapObj = new TypeReference<TaskException>() {
-		};
-		ClassLoader classLoader = getClass().getClassLoader();
-		File file = new File(classLoader.getResource("exception.json").getFile());
-		ObjectMapper mapper = new ObjectMapper();
-		TaskException taskException = mapper.readValue(file, mapObj);
-
-		given(projectManagerDAOImpl.updateUser(null)).willThrow(taskException);
-
-		thrown.expect(TaskException.class);
-		projectManagerService.updateUserInfo(null);
-	}
-*/	@Test
-	public void updateProjectInfo_Valid()
-			throws JsonParseException, JsonMappingException, IOException, TaskException {
+	@Test
+	public void updateProjectInfo_Valid() throws JsonParseException, JsonMappingException, IOException, TaskException {
 		TypeReference<List<Project>> mapObj = new TypeReference<List<Project>>() {
 		};
 		ClassLoader classLoader = getClass().getClassLoader();
@@ -302,7 +287,7 @@ public class ProjectManagerServiceImplTest {
 		List<Project> projects = mapper.readValue(file, mapObj);
 		given(projectManagerDAOImpl.getUser(1)).willReturn(projects.get(0).getUser());
 		given(projectManagerDAOImpl.updateProject(projects.get(0))).willReturn(projects.get(0));
-		assertTrue( projectManagerService.updateProjectInfo(getProjectInfo()));
+		assertTrue(projectManagerService.updateProjectInfo(getProjectInfo()));
 	}
 
 	@Test
@@ -322,8 +307,7 @@ public class ProjectManagerServiceImplTest {
 	}
 
 	@Test
-	public void updateTaskInfo_Valid()
-			throws JsonParseException, JsonMappingException, IOException, TaskException {
+	public void updateTaskInfo_Valid() throws JsonParseException, JsonMappingException, IOException, TaskException {
 		TypeReference<List<Task>> mapObj = new TypeReference<List<Task>>() {
 		};
 		ClassLoader classLoader = getClass().getClassLoader();
@@ -353,34 +337,35 @@ public class ProjectManagerServiceImplTest {
 		thrown.expect(TaskException.class);
 		projectManagerService.updateTaskInfo(getTaskInfo());
 	}
-	
+
 	private UserInfo getUserInfo() throws JsonParseException, JsonMappingException, IOException {
-		TypeReference<UserInfo> mapObj = new TypeReference<UserInfo>() {};
+		TypeReference<UserInfo> mapObj = new TypeReference<UserInfo>() {
+		};
 		ClassLoader classLoader = getClass().getClassLoader();
 		File file = new File(classLoader.getResource("user.json").getFile());
 		ObjectMapper mapper = new ObjectMapper();
 		UserInfo userInfo = mapper.readValue(file, mapObj);
 		return userInfo;
 	}
-	
+
 	private TaskInfo getTaskInfo() throws JsonParseException, JsonMappingException, IOException {
-		TypeReference<TaskInfo> mapObj = new TypeReference<TaskInfo>() {};
+		TypeReference<TaskInfo> mapObj = new TypeReference<TaskInfo>() {
+		};
 		ClassLoader classLoader = getClass().getClassLoader();
 		File file = new File(classLoader.getResource("taskinfo.json").getFile());
 		ObjectMapper mapper = new ObjectMapper();
 		TaskInfo taskInfo = mapper.readValue(file, mapObj);
 		return taskInfo;
 	}
-	
+
 	private ProjectInfo getProjectInfo() throws JsonParseException, JsonMappingException, IOException {
-		TypeReference<ProjectInfo> mapObj = new TypeReference<ProjectInfo>() {};
+		TypeReference<ProjectInfo> mapObj = new TypeReference<ProjectInfo>() {
+		};
 		ClassLoader classLoader = getClass().getClassLoader();
 		File file = new File(classLoader.getResource("projectinfo.json").getFile());
 		ObjectMapper mapper = new ObjectMapper();
 		ProjectInfo projectInfo = mapper.readValue(file, mapObj);
 		return projectInfo;
 	}
-
-
 
 }

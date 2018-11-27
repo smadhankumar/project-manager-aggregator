@@ -10,6 +10,13 @@ import org.springframework.stereotype.Repository;
 
 import com.fsd.casestudy.entity.Project;
 
+/**
+ * Repository for Project
+ * 
+ * @author 463657
+ *
+ */
+
 @Repository
 public interface ProjectRepository extends JpaRepository<Project, Integer> {
 
