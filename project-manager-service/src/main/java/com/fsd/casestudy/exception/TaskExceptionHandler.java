@@ -1,15 +1,10 @@
 /**
- * TaskExceptionHandler.java
+ * Exception handler class used for returning exception
+ * 
+ * @author 463657
  *
- *
- * Modification History
- *
- * Date        Version   Developer      Description
- * ---------   -------   ------------   --------------------------------------
- * 10/16/2018  1.0      463657       Initial Version
  */
 package com.fsd.casestudy.exception;
-
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -19,33 +14,28 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fsd.casestudy.controller.ProjectManagerController;
 
-
-@ControllerAdvice(assignableTypes = {ProjectManagerController.class})
-public class TaskExceptionHandler
-{
+@ControllerAdvice(assignableTypes = { ProjectManagerController.class })
+public class TaskExceptionHandler {
 
 	@ExceptionHandler(Exception.class)
-	public @ResponseBody RestError handleCustomException (Exception ex, HttpServletResponse response) {
+	public @ResponseBody RestError handleCustomException(Exception ex, HttpServletResponse response) {
 		response.setHeader("Content-Type", "application/json");
-		if(ex instanceof TaskException){
+		if (ex instanceof TaskException) {
 
 			response.setStatus(((TaskException) ex).getReturnStatus());
 			return ((TaskException) ex).transformException();
-		}else
-		{
+		} else {
 			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			RestError restError = returnRestError();
 			return restError;
 		}
-		
+
 	}
-	
-	public RestError returnRestError()
-	{
+
+	public RestError returnRestError() {
 		RestError restError = new RestError();
 		Exceptions exception = new Exceptions();
-		exception.setType("E");
-		exception.setCode("PP9043");
+		exception.setCode("1001");
 		exception.setMessage("One or more of the request parameters are missing/wrong. Please correct the request.");
 		exception.setDetail("One or more of the request parameters are missing/wrong. Please correct the request.");
 		Exceptions exceptions[] = new Exceptions[1];

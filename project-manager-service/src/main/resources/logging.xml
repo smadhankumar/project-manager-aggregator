@@ -3,7 +3,7 @@
    
  <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
 
-  <file> C:/fsd/task_manager.log</file>
+  <file> C:/fsd/project_manager.log</file>
 
   <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
     <Pattern>
@@ -13,7 +13,7 @@
 
   <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
     <fileNamePattern>
-     C:/fsd/task_manager_%i.log
+     C:/fsd/project_manager_%i.log
     </fileNamePattern>
   </rollingPolicy>
 

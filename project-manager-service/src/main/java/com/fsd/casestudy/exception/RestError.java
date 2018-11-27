@@ -2,6 +2,7 @@ package com.fsd.casestudy.exception;
 
 /**
  * Rest error
+ * 
  * @author 463657
  *
  */

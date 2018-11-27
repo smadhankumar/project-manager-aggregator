@@ -10,6 +10,13 @@ import org.springframework.stereotype.Repository;
 
 import com.fsd.casestudy.entity.Task;
 
+/**
+ * Repository for task
+ * 
+ * @author 463657
+ *
+ */
+
 @Repository
 public interface TaskRepository extends JpaRepository<Task, Integer> {
 

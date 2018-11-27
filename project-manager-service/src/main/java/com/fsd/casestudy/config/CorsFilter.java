@@ -13,16 +13,18 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Component;
 
 /**
- * This class is used as filter class to allow endpoints for diffrent headers for our application
+ * This class is used as filter class to allow endpoints for different headers
+ * for our application
+ * 
  * @author 463657
  *
  */
 @Component
 public class CorsFilter implements Filter {
 
-
 	@Override
-	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
+	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
+			throws IOException, ServletException {
 
 		HttpServletResponse response = (HttpServletResponse) res;
 

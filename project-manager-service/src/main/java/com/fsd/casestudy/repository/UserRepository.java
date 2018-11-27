@@ -7,6 +7,13 @@ import org.springframework.stereotype.Repository;
 
 import com.fsd.casestudy.entity.User;
 
+/**
+ * Repository for User
+ * 
+ * @author 463657
+ *
+ */
+
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
 
