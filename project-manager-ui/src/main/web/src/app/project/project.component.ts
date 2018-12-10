@@ -116,10 +116,8 @@ export class ProjectComponent implements OnInit {
       "userId": 0,
       "userName": ""
     };
-    this.projectForm.controls['project'].markAsPristine();
-    this.projectForm.controls['project'].markAsUntouched();
-    this.projectForm.controls['userName'].markAsPristine();
-    this.projectForm.controls['userName'].markAsUntouched();
+    this.projectForm.form.markAsPristine();
+    this.projectForm.form.markAsUntouched();
     this.dateError = false;
     this.getProjects();
     return;

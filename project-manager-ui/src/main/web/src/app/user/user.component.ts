@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { TaskService } from '../shared/task-service';
 import { BackendService } from '../shared/backend-service';
-import { DatePipe } from '@angular/common';
 import { NgForm, FormControl, NgModel } from '@angular/forms';
 declare var jQuery: any;
 
@@ -24,7 +23,7 @@ export class UserComponent implements OnInit {
   order: number = 1; // 1 asc, -1 desc;
   fieldName: string = "";
   buttonName: string = "Add";
-  constructor(public router: Router, private backendService: BackendService, private taskService: TaskService, private datePipe: DatePipe) { }
+  constructor(public router: Router, private backendService: BackendService, private taskService: TaskService) { }
 
   ngOnInit() {
     this.screenLoader = true;
@@ -69,12 +68,8 @@ export class UserComponent implements OnInit {
       "lastName": "",
       "empId": ""
     };
-    this.userForm.controls['firstName'].markAsPristine();
-    this.userForm.controls['firstName'].markAsUntouched();
-    this.userForm.controls['lastName'].markAsPristine();
-    this.userForm.controls['lastName'].markAsUntouched();
-    this.userForm.controls['empId'].markAsPristine();
-    this.userForm.controls['empId'].markAsUntouched();
+    this.userForm.form.markAsPristine();
+    this.userForm.form.markAsUntouched();
 
     this.buttonName = "Add";
     this.taskService.editUser = null;
