@@ -121,12 +121,8 @@ export class UpdatetaskComponent implements OnInit {
       "userId": 0,
       "status": 'INPROGRESS'
     };
-    this.taskForm.controls['project'].markAsPristine();
-    this.taskForm.controls['project'].markAsUntouched();
-    this.taskForm.controls['taskName'].markAsPristine();
-    this.taskForm.controls['taskName'].markAsUntouched();
-    this.taskForm.controls['userName'].markAsPristine();
-    this.taskForm.controls['userName'].markAsUntouched();
+    this.taskForm.form.markAsPristine();
+    this.taskForm.form.markAsUntouched();
     this.dateError = false;
     this.buttonName = 'Add Task';
     return;
